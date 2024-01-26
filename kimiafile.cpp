@@ -143,6 +143,45 @@ void playground() {
     }
     int end = time(0);
     int gameTime = end - start;
-     updateUser(username , result , gameTime);
+    updateUser(username , result , gameTime);
     updatehistory(date , username , mapname , gameTime , result);
+}
+
+void updateUser(string name , string result , int gameTime){
+    ifstream file("Users/" + name + ".txt");
+    Player user;
+    if(file.is_open()){
+        file>>user.totalgames>>user.games;
+        file>>user.totalwins>>user.wins;
+        file>>user.gametime>>user.lastTime;
+        file>>user.totalgametime>>user.totalTime;
+        file.close();
+        user.games++;
+        if(result == "Win"){
+            user.wins++;
+            user.lastTime = gameTime;
+        }
+        user.totalTime += gameTime;
+        ofstream file("Users/" + name + ".txt");
+        if(file.is_open()){
+            file<<user.totalgames<<" "<<user.games<<endl<<user.totalwins<<" "<<user.wins<<endl<<user.gametime<<" "<<user.lastTime<<endl<<user.totalgametime<<" "<<user.totalTime;
+            file.close();
+        }
+    }
+    else{
+        ofstream file("Users/" + name + ".txt");
+        if(file.is_open()){
+            file<<"Totalgames: "<< 1 <<endl;
+            if(result == "Win"){
+                file<<"Totalwins: "<< 1 <<endl;
+                file<<"Gametime: " << gameTime << endl;
+            }
+            else{
+                file<<"Totalwins: "<< 0 <<endl;
+                file<<"Gametime: "<< 0 <<endl;
+            }
+            file<<"Totalgametime: "<< gameTime;
+            file.close();
+        }
+    }
 }
