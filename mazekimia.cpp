@@ -226,6 +226,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     ofstream historyfile ("History/history.txt");
     historyfile << a;
 }
+
     void user() {
     string username;
     string totalgames,totalwins,gametime,totalgametime;
