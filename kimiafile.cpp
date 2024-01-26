@@ -197,3 +197,32 @@ void updateUser(string name , string result , int gameTime){
         }
     }
 }
+
+void updatehistory(char* date , string username , string mapname , int gametime , string result) {
+    ifstream file ("History/history.txt");
+    int num = 0;
+    string newdate = date; 
+    string a = "date : " + newdate + "username : " + username + "\n" +"mapname : " + mapname + "\n" + "game time : " + to_string(gametime) + "\n" + "result : "+ result + "\n" + "---------------------" + "\n";
+    string b;
+    if(file.is_open())
+    {
+        while (getline(file , b) &&  num < 9)
+        {
+            a += b + "\n";
+            getline(file , b);
+            a += b + "\n";
+            getline(file , b);
+            a += b + "\n";
+            getline(file , b);
+            a += b + "\n";
+            getline(file , b);
+            a += b + "\n";
+            getline(file , b);
+            a += b + "\n";
+            num++;
+        }
+    file.close();
+    }
+    ofstream historyfile ("History/history.txt");
+    historyfile << a;
+}
