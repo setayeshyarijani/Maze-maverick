@@ -214,4 +214,48 @@ void solvemaze() {
     cout << "press enter to continue";
     getch();
 }
+void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b) {
+    a[x][y] = 1;
+    sum += b[x][y];
+    if (x == n - 1 && y == m - 1 && pathLength == step && sum == 2 * b[n-1][m-1]) {
+        flag = 0;
+        return;
+    }
+    if(pathLength > step - 1 ){
+        a[x][y] = 2;
+        sum -= b[x][y];
+        return;
+    }
+    pathLength++;
+    vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        if (isValid(x+1,y, n, m, a) && b[x+1][y] != 0) {
+            resultpath(x+1, y, n , m , pathLength, step, a, flag, sum , b);
+            if(flag == 0)
+                return;
+        }
+        if (isValid(x-1,y, n, m, a)&&b[x-1][y] != 0) {
+            resultpath(x-1, y, n , m , pathLength, step, a, flag,sum, b);
+            if(flag == 0)
+                return;
+        }
+        if (isValid(x,y+1, n, m, a)&&b[x][y+1] != 0) {
+            resultpath(x, y+1, n , m , pathLength, step, a, flag,sum , b);
+            if(flag == 0)
+                return;
+        }
+         if (isValid(x,y-1, n, m, a) &&b[x][y-1] != 0) {
+            resultpath(x, y-1, n , m , pathLength, step, a, flag,sum, b);
+            if(flag == 0)
+                return;
+         }
+    a[x][y] = 2;
+    sum -=b[x][y];
+    pathLength--;
+}
+
+bool isValid(int x, int y, int n, int m, vector<vector<int>> a) 
+{
+    return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
+}
+
 
