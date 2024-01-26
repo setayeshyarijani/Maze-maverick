@@ -225,4 +225,25 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     }
     ofstream historyfile ("History/history.txt");
     historyfile << a;
+    
+    void user() {
+    string username;
+    string totalgames,totalwins,gametime,totalgametime;
+    cout<<"enter your name: ";
+    cin>>username;
+    ifstream userfile("Users/" + username + ".txt");
+    if(userfile.is_open()){
+        getline(userfile,totalgames);
+        getline(userfile,totalwins);
+        getline(userfile,gametime);
+        getline(userfile,totalgametime);
+    }
+    else
+    {
+        cout<<"no user found";
+    }
+    cout<<totalgames<<endl<<totalwins<<endl<<gametime<<endl<<totalgametime<<endl;
+    cout<<"press enter to continue";
+    getch();
+}
 }
