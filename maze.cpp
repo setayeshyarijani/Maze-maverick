@@ -154,3 +154,64 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
     a[x][y] = 2;
     pathLength--;
 }
+void solvemaze() {
+    system("cls");
+    int number;
+    ifstream mapfile;
+    string mapname, addressfile;
+    cout << "solve maze" <<endl;
+    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
+    cin >> number;
+    if (number==1)
+    {
+        cout << "enter the map name" << endl;
+        cin >> mapname;
+        mapfile.open("Maps/" + mapname + ".txt");
+    }
+    else
+    {   cout << "enter the map address" << endl;
+        cin >> addressfile;
+        mapfile.open(addressfile);
+    }
+    int m, n;
+    mapfile >> m >> n;
+    vector<vector<int>> mapvalues;
+    vector<vector<int>> b(m , vector<int>(n));
+    int pathlength = 0 , flag = 1 , sum = 0;
+    for (int i = 0; i < m; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j < n; j++)
+        {
+            int value;
+            mapfile >> value;
+            temp.push_back(value);
+        }
+        mapvalues.push_back(temp);
+    }
+    int step;
+    mapfile >> step;
+    mapfile.close();
+    for(int i = 0 ; i < m; i++){
+		for(int j = 0; j < n ; j++)
+		{
+			b[i][j] = 2;
+		}
+	}
+    resultpath(0, 0 , m , n , pathlength , step , b , flag , sum , mapvalues);
+    for(int i = 0 ; i < m; i++){
+		for(int j = 0; j < n ; j++)
+		{
+			if(b[i][j] == 1){
+				cout << blue << setw(4) <<mapvalues[i][j]<< reset << " ";
+			}
+			else{
+				cout << setw(4) << mapvalues[i][j] << " ";
+			}
+		}
+		cout << endl;
+	}
+    cout << "press enter to continue";
+    getch();
+}
+
