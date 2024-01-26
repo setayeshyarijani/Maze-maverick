@@ -59,6 +59,90 @@ void playground() {
     int start = time(0);
     time_t now = time(0);
     char* date = ctime(&now);
+     while (true)
+    {
+        system("cls");
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (x == i && y == j)
+                {
+                    cout << red << setw(4) << mapvalues[i][j] << reset << ' ';
+                }
+                else if (mapcrossed[i][j] == true)
+                {
+                    cout << blue << setw(4) << mapvalues[i][j] << reset << ' ';
+                }
+                else
+                {
+                    cout << setw(4) << mapvalues[i][j] << ' ';
+                }
+            }
+            cout << endl;
+        }
+        if (x == m - 1 && y == n - 1)
+        {
+            if (sum != mapvalues[x][y])
+                win = false;
+            break;
+        }
+        mapcrossed[x][y] = true;
+        int ch = getch();
+        bool breakthewhile = false;
+        switch (ch)
+        {
+        case 119: // up
+            if (x > 0 && mapcrossed[x - 1][y] == false && mapvalues[x - 1][y] !=0 )
+            {
+                sum += mapvalues[x][y];
+                x--;
+            }
+            break;
+        case 115: // down
+            if (x < m - 1 && mapcrossed[x + 1][y] == false && mapvalues[x + 1][y] !=0)
+            {
+                sum += mapvalues[x][y];
+                x++;
+            }
+            break;
+        case 97: // left
+            if (y > 0 && mapcrossed[x][y - 1] == false && mapvalues[x][y - 1] !=0)
+            {
+                sum += mapvalues[x][y];
+                y--;
+            }
+            break;
+        case 100: // right
+            if (y < n - 1 && mapcrossed[x][y + 1] == false && mapvalues[x][y + 1] != 0)
+            {
+                sum += mapvalues[x][y];
+                y++;
+            }
+            break;
+        case 27: // escape
+            breakthewhile = true;
+            win = false;
+            break;
+        }
+        if (breakthewhile == true)
+        {
+            break;
+        }
+    }
+    string result;
+    if(win){
+        cout << "you win"<<endl << "press enter to continue";
+        getch();
+        result = "Win";
+    }
+    else{
+       cout << "you lose"<<endl << "press enter to continue";
+       getch();
+       result = "Lose";
+    }
     int end = time(0);
     int gameTime = end - start;
+     updateUser(username , result , gameTime);
+    updatehistory(date , username , mapname , gameTime , result);
 }
