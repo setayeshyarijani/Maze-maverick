@@ -225,7 +225,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     }
     ofstream historyfile ("History/history.txt");
     historyfile << a;
-    
+}
     void user() {
     string username;
     string totalgames,totalwins,gametime,totalgametime;
@@ -246,4 +246,14 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     cout<<"press enter to continue";
     getch();
 }
+
+void history() {
+    string line;
+    ifstream historyfile("History/history.txt");
+    while(getline(historyfile , line)){
+        cout<<line<<endl;
+    }
+    historyfile.close();
+    cout<<"press enter to continue";
+    getch();
 }
