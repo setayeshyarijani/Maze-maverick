@@ -227,7 +227,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     historyfile << a;
 }
 
-    void user() {
+void user() {
     string username;
     string totalgames,totalwins,gametime,totalgametime;
     cout<<"enter your name: ";
@@ -257,4 +257,25 @@ void history() {
     historyfile.close();
     cout<<"press enter to continue";
     getch();
+}
+
+void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
+    string mapsname;
+    cout << "enter the map name: ";
+    cin >> mapsname;
+    ofstream map("Maps/" + mapsname + ".txt");
+    if (map.is_open())
+    {
+        map << n << " " << m << endl;
+        for (int i=0 ; i<n ; i++)
+        {
+            for (int j=0 ; j<m ; j++)
+            {
+                map <<left << setw(4) << mazemap[i][j] << " ";   
+            }
+            map << endl;
+        }
+        map << step << endl;
+        map.close();
+    }
 }
