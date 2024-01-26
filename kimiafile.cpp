@@ -12,6 +12,18 @@ string red = "\033[0;31m";
 string blue = "\033[0;36m";
 string reset = "\033[0m";
 
+struct Player
+{
+    int games;
+    int wins;
+    int lastTime;
+    int totalTime;
+    string totalgames;
+    string totalwins;
+    string gametime;
+    string totalgametime;
+};
+
 void playground() {
     system("cls");
     int number;
