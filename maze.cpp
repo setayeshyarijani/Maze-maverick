@@ -123,4 +123,34 @@ void createmap()
     cout << "press enter to continue";
     getch();
 }
-
+void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag) 
+{
+    a[x][y] = 1;
+    if (x == n - 1 && y == m - 1 && pathLength == step ) 
+      {
+        flag = 0;
+        return;
+      }
+    if(pathLength > step - 1)
+    {
+        a[x][y] = 2;
+        return;
+    }
+    pathLength++;
+    vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    random_device rd;
+    mt19937 gen(rd());
+    shuffle(moves.begin() ,moves.end() ,gen);
+    for (const auto& move : moves) {
+        int new_x = x + move.first;
+        int new_y = y + move.second;
+        if (isValid(new_x, new_y, n, m, a)) {
+            findPath(new_x, new_y, n , m , pathLength, step, a, flag);
+            if(flag == 0)
+                return;
+        }
+    }
+    // can go in it agaian later
+    a[x][y] = 2;
+    pathLength--;
+}
