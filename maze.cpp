@@ -164,6 +164,13 @@ void solvemaze() {
     cin >> number;
     if (number == 1)
     {   
+	cout << "mapslist: " << endl;
+        string line;
+        ifstream mapslist("Maps/mapslist.txt");
+        while(getline(mapslist, line)){
+            cout << line << endl;
+        }
+        mapslist.close();
         while ( whileflag == 1){
             cout << "Enter the map name" << endl;
             cin >> mapname;
