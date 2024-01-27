@@ -26,6 +26,39 @@ struct Player
     string totalgametime;
 };
 
+int main() {
+    while(true){
+    system("cls");
+    int number;
+    cout << "1.Create a new map" << endl << "2.Playground" << endl << "3.Solve a maze" << endl << "4.Users" << endl << "5.History" << endl << "6.Exit" << endl;
+    cin >> number;
+    switch(number){
+        case 1: createmap();
+            break;
+        
+        case 2: playground();
+            break;
+        
+        case 3: solvemaze();
+            break;
+        
+        case 4: user();
+            break;
+        
+        case 5: history();
+            break;
+
+        case 6:
+            return 0;
+
+        default:
+        cout << "Wrong number!" << endl << "Press enter to continue";
+        getch();
+            break;
+    }
+    }
+}
+
 void createmap();
 void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag);
 void savemap(int n , int m , int step , vector<vector<int>> mazemap);
