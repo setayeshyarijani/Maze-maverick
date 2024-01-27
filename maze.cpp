@@ -8,10 +8,12 @@
 #include <algorithm>
 using namespace std;
 
+// define colors // 
 string red = "\033[0;31m";
 string blue = "\033[0;36m";
 string reset = "\033[0m";
 
+// function for creating easy and hard map //
 void createmap() 
 {
     system("cls");
@@ -19,6 +21,7 @@ void createmap()
     int number, n, m, min_num, max_num, min_zero, max_zero, step;
     cout << "1.Easy" << endl << "2.Hard" << endl << "3.Back to menu" <<endl;
     cin >> number;
+    // easy map //
     if(number == 1)
 	{
         cout << "Height: " << endl;
@@ -31,6 +34,7 @@ void createmap()
         max_zero = min(5 , m * n - m - n + 1);
         step = m + n - 2;
     }
+    //hard map
     else if(number == 2)
 	{
         cout << "Height: " << endl;
@@ -54,15 +58,17 @@ void createmap()
     bool pathfound = false;
     vector<vector<int>> a(n, vector<int>(m));
         for(int i = 0; i < n; i++)
-          {
-            for(int j = 0; j < m; j++)
+        {
+             for(int j = 0; j < m; j++)
              {
                 a[i][j] = 2;
              }
-          }
+        }
     int pathLength = 0;
     int flag = 1;
+    // finding maze path //
     findPath(0 , 0 , n, m, pathLength, step ,a , flag);
+    // generate random number //
     random_device rd;
     mt19937 gen(rd());
     int num_zeros = min_zero + rand() % (max_zero - min_zero + 1);
@@ -72,6 +78,7 @@ void createmap()
     int zeros_placed = 0;
     do {
         validMatrix = true;
+	// place block (0) in map //
         for (int i = 0; i < n; i++)
             for (int j = 0; j < m; j++) 
              {
@@ -87,6 +94,7 @@ void createmap()
             }
     } 
     while (!validMatrix);
+    // filling the rest blocks randomly //
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++) 
         {
@@ -108,7 +116,9 @@ void createmap()
                while (a[i][j] == 0);
             }
         }
+    // put sum in the last block //
     a[n - 1][m - 1] = sum;
+    // show the created map in terminal //
     for (int i = 0; i < n; i++) 
     {
             for (int j = 0; j < m; j++) 
@@ -118,10 +128,12 @@ void createmap()
               }
             cout << endl;
     }
+    // saving created map in map file //
     savemap(n, m, step, a);
     cout << "Press enter to continue";
     getch();
 }
+// function for make move and find path //
 void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag) 
 {
     a[x][y] = 1;
@@ -139,6 +151,7 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
     vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     random_device rd;
     mt19937 gen(rd());
+    // finding the path randomly //
     shuffle(moves.begin() ,moves.end() ,gen);
     for (const auto& move : moves) {
         int new_x = x + move.first;
@@ -149,10 +162,11 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
                 return;
         }
     }
-    // can go in it agaian later
+    // can go in it agaian later //
     a[x][y] = 2;
     pathLength--;
 }
+// function for solving maps and showing the path // 
 void solvemaze() {
     system("cls");
     cout << red << "Solve maze" << reset <<endl;
@@ -160,10 +174,13 @@ void solvemaze() {
     int whileflag = 1;
     ifstream mapfile;
     string mapname, addressfile;
+    // get the player choice //
     cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl <<  "3.Back to menu" <<endl;
     cin >> number;
+    // for exist map //
     if (number == 1)
     {   
+	// showing mapslist for user to choose from them //
 	cout << "mapslist: " << endl;
         string line;
         ifstream mapslist("Maps/mapslist.txt");
@@ -171,23 +188,29 @@ void solvemaze() {
             cout << line << endl;
         }
         mapslist.close();
+	// get the player map name //
         while ( whileflag == 1){
             cout << "Enter the map name" << endl;
             cin >> mapname;
             mapfile.open("Maps/" + mapname + ".txt");
+	    // if the map exists //
             if(mapfile.is_open())
                 whileflag = 0;
+	    // if the map doesn't exist //	    
             else
                 cout << "No map found!" << endl;
         }
     }
+    // new custom map importing from user //
     else if(number == 2)
     {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    // back to menu //
     else if(number == 3)
 	return;
+    // reading mapfile //
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
@@ -207,12 +230,14 @@ void solvemaze() {
     int step;
     mapfile >> step;
     mapfile.close();
+    // creating vector<vector<int>>b //
     for(int i = 0 ; i < m; i++){
 		for(int j = 0; j < n ; j++)
 		{
 			b[i][j] = 2;
 		}
 	}
+    // show maze path //
     resultpath(0, 0, m, n, pathlength, step, b, flag, sum, mapvalues);
     for(int i = 0 ; i < m; i++){
 		for(int j = 0; j < n ; j++)
@@ -229,6 +254,7 @@ void solvemaze() {
     cout << "Press enter to continue";
     getch();
 }
+// function for finding maze solving path //
 void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b) {
     a[x][y] = 1;
     sum += b[x][y];
@@ -242,6 +268,7 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
         return;
     }
     pathLength++;
+    // condition for move and path //
     vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
         if (isValid(x+1, y, n, m, a) && b[x+1][y] != 0) {
             resultpath(x+1, y, n, m, pathLength, step, a, flag, sum, b);
@@ -267,7 +294,7 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
     sum -=b[x][y];
     pathLength--;
 }
-
+// function for valid blocks //
 bool isValid(int x, int y, int n, int m, vector<vector<int>> a) 
 {
     return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
