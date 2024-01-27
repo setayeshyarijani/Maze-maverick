@@ -30,7 +30,7 @@ void playground() {
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl << "3.Back to menu" <<endl;
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl << "3.Back to menu" << endl;
     cin >> number;
     if (number == 1)
     {
@@ -146,12 +146,12 @@ void playground() {
     }
     string result;
     if(win){
-        cout << "You win"<<endl << "Press enter to continue";
+        cout << "You win" << endl << "Press enter to continue";
         getch();
         result = "Win";
     }
     else{
-       cout << "You lose"<<endl << "Press enter to continue";
+       cout << "You lose"<< endl << "Press enter to continue";
        getch();
        result = "Lose";
     }
@@ -165,10 +165,10 @@ void updateUser(string name , string result , int gameTime){
     ifstream file("Users/" + name + ".txt");
     Player user;
     if(file.is_open()){
-        file>>user.totalgames>>user.games;
-        file>>user.totalwins>>user.wins;
-        file>>user.gametime>>user.lastTime;
-        file>>user.totalgametime>>user.totalTime;
+        file >> user.totalgames >> user.games;
+        file >> user.totalwins >> user.wins;
+        file >> user.gametime >> user.lastTime;
+        file >> user.totalgametime >> user.totalTime;
         file.close();
         user.games++;
         if(result == "Win"){
@@ -178,23 +178,23 @@ void updateUser(string name , string result , int gameTime){
         user.totalTime += gameTime;
         ofstream file("Users/" + name + ".txt");
         if(file.is_open()){
-            file<<user.totalgames<<" "<<user.games<<endl<<user.totalwins<<" "<<user.wins<<endl<<user.gametime<<" "<<user.lastTime<<endl<<user.totalgametime<<" "<<user.totalTime;
+            file << user.totalgames << " " << user.games << endl << user.totalwins << " " << user.wins << endl << user.gametime << " " << user.lastTime << endl << user.totalgametime << " " << user.totalTime;
             file.close();
         }
     }
     else{
         ofstream file("Users/" + name + ".txt");
         if(file.is_open()){
-            file<<"Totalgames: "<< 1 <<endl;
+            file << "Totalgames: " << 1 << endl;
             if(result == "Win"){
-                file<<"Totalwins: "<< 1 <<endl;
-                file<<"Gametime: " << gameTime << endl;
+                file << "Totalwins: " << 1 << endl;
+                file << "Gametime: " << gameTime << endl;
             }
             else{
-                file<<"Totalwins: "<< 0 <<endl;
-                file<<"Gametime: "<< 0 <<endl;
+                file << "Totalwins: " << 0 << endl;
+                file << "Gametime: " << 0 << endl;
             }
-            file<<"Totalgametime: "<< gameTime;
+            file << "Totalgametime: " << gameTime;
             file.close();
         }
     }
@@ -204,7 +204,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     ifstream file ("History/history.txt");
     int num = 0;
     string newdate = date; 
-    string a = "Date: " + newdate + "Username: " + username + "\n" +"Mapname: " + mapname + "\n" + "Gametime: " + to_string(gametime) + "\n" + "Result: "+ result + "\n" + "---------------------" + "\n";
+    string a = "Date: " + newdate + "Username: " + username + "\n" + "Mapname: " + mapname + "\n" + "Gametime: " + to_string(gametime) + "\n" + "Result: "+ result + "\n" + "---------------------" + "\n";
     string b;
     if(file.is_open())
     {
@@ -233,22 +233,22 @@ void user() {
     system("cls");
     cout << red << "Users" << reset << endl;
     string username;
-    string totalgames,totalwins,gametime,totalgametime;
-    cout<<"Enter your name: ";
-    cin>>username;
+    string totalgames, totalwins, gametime, totalgametime;
+    cout << "Enter your name: ";
+    cin >> username;
     ifstream userfile("Users/" + username + ".txt");
     if(userfile.is_open()){
-        getline(userfile,totalgames);
-        getline(userfile,totalwins);
-        getline(userfile,gametime);
-        getline(userfile,totalgametime);
+        getline(userfile, totalgames);
+        getline(userfile, totalwins);
+        getline(userfile, gametime);
+        getline(userfile, totalgametime);
     }
     else
     {
-        cout<<"No user found";
+        cout << "No user found";
     }
-    cout<<totalgames<<endl<<totalwins<<endl<<gametime<<endl<<totalgametime<<endl;
-    cout<<"Press enter to continue";
+    cout << totalgames << endl << totalwins <<endl << gametime << endl << totalgametime << endl;
+    cout << "Press enter to continue";
     getch();
 }
 
@@ -258,10 +258,10 @@ void history() {
     string line;
     ifstream historyfile("History/history.txt");
     while(getline(historyfile , line)){
-        cout<<line<<endl;
+        cout << line << endl;
     }
     historyfile.close();
-    cout<<"Press enter to continue";
+    cout << "Press enter to continue";
     getch();
 }
 
