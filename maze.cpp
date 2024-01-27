@@ -15,17 +15,17 @@ string reset = "\033[0m";
 void createmap() 
 {
     system("cls");
-    cout << "create map" << endl;
+    cout << red << "Create map" << reset << endl;
     int difficulty, n, m, min_num, max_num, min_zero, max_zero, step;
     
-    cout << "1.easy" << endl << "2.hard" << endl;
+    cout << "1.Easy" << endl << "2.Hard" << endl;
     cin >> difficulty;
     
     if(difficulty == 1)
 	{
-        cout << "height: " << endl;
+        cout << "Height: " << endl;
         cin >> n;
-        cout << "width: " << endl;
+        cout << "Width: " << endl;
         cin >> m;
         min_num = -3;
         max_num = 3;
@@ -35,17 +35,17 @@ void createmap()
     }
     else
 	{
-        cout << "height: " << endl;
+        cout << "Height: " << endl;
         cin >> n;
-        cout << "width: " << endl;
+        cout << "Width: " << endl;
         cin >> m;
-        cout << "block min value: " << endl;
+        cout << "Block min value: " << endl;
         cin >> min_num;
-        cout << "block max value: " << endl;
+        cout << "Block max value: " << endl;
 		cin >> max_num;
-        cout << "block min zero: " << endl;
+        cout << "Block min zero: " << endl;
         cin >> min_zero; 
-        cout << "block max zero: " << endl;
+        cout << "Block max zero: " << endl;
         cin >> max_zero;
         cout << "PathLength: " << endl;
         cin >> step;
@@ -156,20 +156,20 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
 }
 void solvemaze() {
     system("cls");
+    cout << red << "Solve maze" << reset <<endl;
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "solve maze" <<endl;
-    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl << "3.back to menu" <<endl;
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl << "3.Back to menu" <<endl;
     cin >> number;
-    if (number==1)
+    if (number == 1)
     {
-        cout << "enter the map name" << endl;
+        cout << "Enter the map name" << endl;
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else if(number==2)
-    {   cout << "enter the map address" << endl;
+    else if(number == 2)
+    {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
@@ -205,7 +205,7 @@ void solvemaze() {
 		for(int j = 0; j < n ; j++)
 		{
 			if(b[i][j] == 1){
-				cout << blue << setw(4) <<mapvalues[i][j]<< reset << " ";
+				cout << blue << setw(4) <<mapvalues[i][j] << reset << " ";
 			}
 			else{
 				cout << setw(4) << mapvalues[i][j] << " ";
@@ -213,7 +213,7 @@ void solvemaze() {
 		}
 		cout << endl;
 	}
-    cout << "press enter to continue";
+    cout << "Press enter to continue";
     getch();
 }
 void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b) {
@@ -230,23 +230,23 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
     }
     pathLength++;
     vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        if (isValid(x+1,y, n, m, a) && b[x+1][y] != 0) {
-            resultpath(x+1, y, n , m , pathLength, step, a, flag, sum , b);
+        if (isValid(x+1, y, n, m, a) && b[x+1][y] != 0) {
+            resultpath(x+1, y, n, m, pathLength, step, a, flag, sum , b);
             if(flag == 0)
                 return;
         }
-        if (isValid(x-1,y, n, m, a)&&b[x-1][y] != 0) {
-            resultpath(x-1, y, n , m , pathLength, step, a, flag,sum, b);
+        if (isValid(x-1, y, n, m, a)&&b[x-1][y] != 0) {
+            resultpath(x-1, y, n, m, pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
         }
-        if (isValid(x,y+1, n, m, a)&&b[x][y+1] != 0) {
-            resultpath(x, y+1, n , m , pathLength, step, a, flag,sum , b);
+        if (isValid(x, y+1, n, m, a)&&b[x][y+1] != 0) {
+            resultpath(x, y+1, n, m, pathLength, step, a, flag, sum , b);
             if(flag == 0)
                 return;
         }
-         if (isValid(x,y-1, n, m, a) &&b[x][y-1] != 0) {
-            resultpath(x, y-1, n , m , pathLength, step, a, flag,sum, b);
+         if (isValid(x, y-1, n, m, a) &&b[x][y-1] != 0) {
+            resultpath(x, y-1, n, m, pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
          }
@@ -259,5 +259,3 @@ bool isValid(int x, int y, int n, int m, vector<vector<int>> a)
 {
     return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
 }
-
-
