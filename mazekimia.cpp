@@ -40,6 +40,7 @@ void playground() {
     cin >> number;
     if (number == 1)
     {
+        // showing mapslist for user to choose from them //
         cout << "mapslist: " << endl;
         string line;
         ifstream mapslist("Maps/mapslist.txt");
@@ -47,12 +48,15 @@ void playground() {
             cout << line << endl;
         }
         mapslist.close();
+        // get the player map name //
         while ( whileflag == 1){
             cout << "Enter the map name" << endl;
             cin >> mapname;
             mapfile.open("Maps/" + mapname + ".txt");
+            // if the map exists //
             if(mapfile.is_open())
                 whileflag = 0;
+            // if the map doesn't exist //
             else
                 cout << "No map found!" << endl;
         }
