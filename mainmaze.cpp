@@ -158,6 +158,7 @@ void createmap()
     cout << "Press enter to continue";
     getch();
 }
+
 // function for make move and find path //
 void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag) 
 {
@@ -191,6 +192,50 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
     a[x][y] = 2;
     pathLength--;
 }
+
+// function for saving created map as file //
+void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
+    string mapsname;
+    // getting map name from user //
+    cout << "Enter the map name: ";
+    cin >> mapsname;
+    string a="";
+    string b;
+    // adding mapname to a mapsname file //
+    ifstream inputfile("Maps/mapsname.txt");
+    if (inputfile.is_open()){
+        while(getline(inputfile, b)){
+            a += b + "\n";
+        }
+        a += mapsname + "\n";
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << a;
+        outputfile.close();
+    }
+    else{
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << mapsname;
+        outputfile.close();
+    }
+    inputfile.close();
+    ofstream map("Maps/" + mapsname + ".txt");
+    // write map in file //
+    if (map.is_open())
+    {
+        map << n << " " << m << endl;
+        for (int i=0 ; i<n ; i++)
+        {
+            for (int j=0 ; j<m ; j++)
+            {
+                map <<left << setw(4) << mazemap[i][j] << " ";   
+            }
+            map << endl;
+        }
+        map << step << endl;
+        map.close();
+    }
+}
+
 // function for solving maps and showing the path // 
 void solvemaze() {
     system("cls");
@@ -279,6 +324,7 @@ void solvemaze() {
     cout << "Press enter to continue";
     getch();
 }
+
 // function for finding maze solving path //
 void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b) {
     a[x][y] = 1;
@@ -319,12 +365,12 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
     sum -=b[x][y];
     pathLength--;
 }
+
 // function for valid blocks //
 bool isValid(int x, int y, int n, int m, vector<vector<int>> a) 
 {
     return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
 }
-
 
 // function for playing game //
 void playground() {
@@ -602,47 +648,4 @@ void history() {
     historyfile.close();
     cout << "Press enter to continue";
     getch();
-}
-
-// function for saving created map as file //
-void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
-    string mapsname;
-    // getting map name from user //
-    cout << "Enter the map name: ";
-    cin >> mapsname;
-    string a="";
-    string b;
-    // adding mapname to a mapsname file //
-    ifstream inputfile("Maps/mapsname.txt");
-    if (inputfile.is_open()){
-        while(getline(inputfile, b)){
-            a += b + "\n";
-        }
-        a += mapsname + "\n";
-        ofstream outputfile("Maps/mapsname.txt");
-        outputfile << a;
-        outputfile.close();
-    }
-    else{
-        ofstream outputfile("Maps/mapsname.txt");
-        outputfile << mapsname;
-        outputfile.close();
-    }
-    inputfile.close();
-    ofstream map("Maps/" + mapsname + ".txt");
-    // write map in file //
-    if (map.is_open())
-    {
-        map << n << " " << m << endl;
-        for (int i=0 ; i<n ; i++)
-        {
-            for (int j=0 ; j<m ; j++)
-            {
-                map <<left << setw(4) << mazemap[i][j] << " ";   
-            }
-            map << endl;
-        }
-        map << step << endl;
-        map.close();
-    }
 }
