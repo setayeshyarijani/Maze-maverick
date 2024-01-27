@@ -38,7 +38,7 @@ void playground() {
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else if(number == 1)
+    else if(number == 2)
     {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);

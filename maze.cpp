@@ -160,7 +160,7 @@ void solvemaze() {
     ifstream mapfile;
     string mapname, addressfile;
     cout << "solve maze" <<endl;
-    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
+    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl << "3.back to menu" <<endl;
     cin >> number;
     if (number==1)
     {
@@ -168,11 +168,13 @@ void solvemaze() {
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else
+    else if(number==2)
     {   cout << "enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    else if(number==3)
+        return;
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
