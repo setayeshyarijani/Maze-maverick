@@ -40,12 +40,23 @@ void playground() {
     cin >> number;
     if (number == 1)
     {
+        // showing mapslist for user to choose from them //
+        cout << "mapslist: " << endl;
+        string line;
+        ifstream mapslist("Maps/mapslist.txt");
+        while(getline(mapslist, line)){
+            cout << line << endl;
+        }
+        mapslist.close();
+        // get the player map name //
         while ( whileflag == 1){
             cout << "Enter the map name" << endl;
             cin >> mapname;
             mapfile.open("Maps/" + mapname + ".txt");
+            // if the map exists //
             if(mapfile.is_open())
                 whileflag = 0;
+            // if the map doesn't exist //
             else
                 cout << "No map found!" << endl;
         }
@@ -286,7 +297,7 @@ void history() {
     string line;
     ifstream historyfile("History/history.txt");
     while(getline(historyfile, line)){
-        cout<<line<<endl;
+        cout << line << endl;
     }
     historyfile.close();
     cout << "Press enter to continue";
@@ -299,6 +310,25 @@ void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     // getting map name from user //
     cout << "Enter the map name: ";
     cin >> mapsname;
+    string a="";
+    string b;
+    // adding mapname to a mapsname file //
+    ifstream inputfile("Maps/mapsname.txt");
+    if (inputfile.is_open()){
+        while(getline(inputfile, b)){
+            a += b + "\n";
+        }
+        a += mapsname + "\n";
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << a;
+        outputfile.close();
+    }
+    else{
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << mapsname;
+        outputfile.close();
+    }
+    inputfile.close();
     ofstream map("Maps/" + mapsname + ".txt");
     // write map in file //
     if (map.is_open())
