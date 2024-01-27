@@ -43,6 +43,7 @@ int main() {
     while(true){
     system("cls");
     int number;
+    // show the menu //
     cout << "1.Create a new map" << endl << "2.Playground" << endl << "3.Solve a maze" << endl << "4.Users" << endl << "5.History" << endl << "6.Exit" << endl;
     cin >> number;
     switch(number){
