@@ -157,15 +157,22 @@ void solvemaze() {
     system("cls");
     cout << red << "Solve maze" << reset <<endl;
     int number;
+    int whileflag = 1;
     ifstream mapfile;
     string mapname, addressfile;
     cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl <<  "3.Back to menu" <<endl;
     cin >> number;
     if (number == 1)
-    {
-        cout << "Enter the map name" << endl;
-        cin >> mapname;
-        mapfile.open("Maps/" + mapname + ".txt");
+    {   
+        while ( whileflag == 1){
+            cout << "Enter the map name" << endl;
+            cin >> mapname;
+            mapfile.open("Maps/" + mapname + ".txt");
+            if(mapfile.is_open())
+                whileflag = 0;
+            else
+                cout << "No map found!" << endl;
+        }
     }
     else if(number == 2)
     {   cout << "Enter the map address" << endl;
