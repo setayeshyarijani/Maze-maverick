@@ -235,18 +235,18 @@ void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     string a="";
     string b;
     // adding mapname to a mapsname file //
-    ifstream inputfile("Maps/mapsname.txt");
+    ifstream inputfile("Maps/mapslist.txt");
     if (inputfile.is_open()){
         while(getline(inputfile, b)){
             a += b + "\n";
         }
         a += mapsname + "\n";
-        ofstream outputfile("Maps/mapsname.txt");
+        ofstream outputfile("Maps/mapslist.txt");
         outputfile << a;
         outputfile.close();
     }
     else{
-        ofstream outputfile("Maps/mapsname.txt");
+        ofstream outputfile("Maps/mapslist.txt");
         outputfile << mapsname;
         outputfile.close();
     }
