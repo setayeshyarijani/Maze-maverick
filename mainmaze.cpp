@@ -26,6 +26,7 @@ struct Player
     string totalgametime;
 };
 
+// function prototype //
 void createmap();
 void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag);
 void savemap(int n , int m , int step , vector<vector<int>> mazemap);
