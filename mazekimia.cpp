@@ -8,10 +8,12 @@
 #include <algorithm>
 using namespace std;
 
+// define colors //
 string red = "\033[0;31m";
 string blue = "\033[0;36m";
 string reset = "\033[0m";
 
+// struct for users and games information //
 struct Player
 {
     int games;
@@ -24,13 +26,16 @@ struct Player
     string totalgametime;
 };
 
+// function for playing game //
 void playground() {
     system("cls");
     int number;
+    // define mapfile for choosing a map //
     ifstream mapfile;
     string mapname, addressfile;
     cout << "Playground" << endl;
     cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
+    // get the player choice //
     cin >> number;
     if (number==1)
     {
@@ -43,6 +48,7 @@ void playground() {
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    // reading mapfile //
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
@@ -69,11 +75,13 @@ void playground() {
     int x = 0, y = 0;
     bool win = true;
     int start = time(0);
+    // calculate the Date //
     time_t now = time(0);
     char* date = ctime(&now);
-     while (true)
+    while (true)
     {
         system("cls");
+        // show status of map //
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
@@ -100,6 +108,7 @@ void playground() {
             break;
         }
         mapcrossed[x][y] = true;
+        // define and make movements //
         int ch = getch();
         bool breakthewhile = false;
         switch (ch)
@@ -142,6 +151,7 @@ void playground() {
             break;
         }
     }
+    // show the game result //
     string result;
     if(win){
         cout << "you win"<<endl << "press enter to continue";
@@ -154,14 +164,18 @@ void playground() {
        result = "Lose";
     }
     int end = time(0);
+    // calculate the gametime //
     int gameTime = end - start;
+    // update user and history files //
     updateUser(username , result , gameTime);
     updatehistory(date , username , mapname , gameTime , result);
 }
 
+// function for updating users game information //
 void updateUser(string name , string result , int gameTime){
     ifstream file("Users/" + name + ".txt");
     Player user;
+    // if user has played before //
     if(file.is_open()){
         file>>user.totalgames>>user.games;
         file>>user.totalwins>>user.wins;
@@ -180,6 +194,7 @@ void updateUser(string name , string result , int gameTime){
             file.close();
         }
     }
+    // new user //
     else{
         ofstream file("Users/" + name + ".txt");
         if(file.is_open()){
@@ -198,12 +213,14 @@ void updateUser(string name , string result , int gameTime){
     }
 }
 
+// updating users game history //
 void updatehistory(char* date , string username , string mapname , int gametime , string result) {
     ifstream file ("History/history.txt");
     int num = 0;
     string newdate = date; 
     string a = "date : " + newdate + "username : " + username + "\n" +"mapname : " + mapname + "\n" + "game time : " + to_string(gametime) + "\n" + "result : "+ result + "\n" + "---------------------" + "\n";
     string b;
+    // updating game history for 10 last games //
     if(file.is_open())
     {
         while (getline(file , b) &&  num < 9)
@@ -227,18 +244,21 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     historyfile << a;
 }
 
+// function for showing user information //
 void user() {
     string username;
     string totalgames,totalwins,gametime,totalgametime;
     cout<<"enter your name: ";
     cin>>username;
     ifstream userfile("Users/" + username + ".txt");
+    // if user exists //
     if(userfile.is_open()){
         getline(userfile,totalgames);
         getline(userfile,totalwins);
         getline(userfile,gametime);
         getline(userfile,totalgametime);
     }
+    // if user doesn't exist //
     else
     {
         cout<<"no user found";
@@ -248,10 +268,11 @@ void user() {
     getch();
 }
 
+// function for showing games history //
 void history() {
     string line;
     ifstream historyfile("History/history.txt");
-    while(getline(historyfile , line)){
+    while(getline(historyfile, line)){
         cout<<line<<endl;
     }
     historyfile.close();
@@ -259,11 +280,14 @@ void history() {
     getch();
 }
 
+// function for saving created map as file //
 void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     string mapsname;
+    // getting map name from user //
     cout << "enter the map name: ";
     cin >> mapsname;
     ofstream map("Maps/" + mapsname + ".txt");
+    // write map in file //
     if (map.is_open())
     {
         map << n << " " << m << endl;
