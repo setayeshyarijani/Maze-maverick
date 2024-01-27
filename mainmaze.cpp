@@ -13,6 +13,31 @@ string red = "\033[0;31m";
 string blue = "\033[0;36m";
 string reset = "\033[0m";
 
+// struct for users and games information //
+struct Player
+{
+    int games;
+    int wins;
+    int lastTime;
+    int totalTime;
+    string totalgames;
+    string totalwins;
+    string gametime;
+    string totalgametime;
+};
+
+void createmap();
+void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag);
+void savemap(int n , int m , int step , vector<vector<int>> mazemap);
+void solvemaze();
+void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b);
+bool isValid(int x, int y, int n, int m, vector<vector<int>> a);
+void playground();
+void updateUser(string name , string result , int gameTime);
+void updatehistory(char* date , string username , string mapname , int gametime , string result);
+void user();
+void history();
+
 // function for creating easy and hard map //
 void createmap() 
 {
@@ -300,18 +325,6 @@ bool isValid(int x, int y, int n, int m, vector<vector<int>> a)
     return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
 }
 
-// struct for users and games information //
-struct Player
-{
-    int games;
-    int wins;
-    int lastTime;
-    int totalTime;
-    string totalgames;
-    string totalwins;
-    string gametime;
-    string totalgametime;
-};
 
 // function for playing game //
 void playground() {
