@@ -26,6 +26,18 @@ struct Player
     string totalgametime;
 };
 
+void createmap();
+void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag);
+void savemap(int n , int m , int step , vector<vector<int>> mazemap);
+void solvemaze();
+void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b);
+bool isValid(int x, int y, int n, int m, vector<vector<int>> a);
+void playground();
+void updateUser(string name , string result , int gameTime);
+void updatehistory(char* date , string username , string mapname , int gametime , string result);
+void user();
+void history();
+
 int main() {
     while(true){
     system("cls");
@@ -58,18 +70,6 @@ int main() {
     }
     }
 }
-
-void createmap();
-void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag);
-void savemap(int n , int m , int step , vector<vector<int>> mazemap);
-void solvemaze();
-void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<vector<int>>& a, int& flag, int &sum , vector<vector<int>>b);
-bool isValid(int x, int y, int n, int m, vector<vector<int>> a);
-void playground();
-void updateUser(string name , string result , int gameTime);
-void updatehistory(char* date , string username , string mapname , int gametime , string result);
-void user();
-void history();
 
 // function for creating easy and hard map //
 void createmap() 
@@ -284,7 +284,7 @@ void solvemaze() {
     if (number == 1)
     {   
 	// showing mapslist for user to choose from them //
-	cout << "mapslist: " << endl;
+	cout << blue << "mapslist: " << reset << endl;
         string line;
         ifstream mapslist("Maps/mapslist.txt");
         while(getline(mapslist, line)){
@@ -420,7 +420,7 @@ void playground() {
     if (number == 1)
     {
         // showing mapslist for user to choose from them //
-        cout << "mapslist: " << endl;
+        cout << blue << "mapslist: " << reset << endl;
         string line;
         ifstream mapslist("Maps/mapslist.txt");
         while(getline(mapslist, line)){
