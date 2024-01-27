@@ -26,10 +26,10 @@ struct Player
 
 void playground() {
     system("cls");
+    cout << red << "Playground" << reset << endl;
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "Playground" << endl;
     cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
     cin >> number;
     if (number==1)
@@ -228,6 +228,8 @@ void updatehistory(char* date , string username , string mapname , int gametime 
 }
 
 void user() {
+    system("cls");
+    cout << red << "Users" << reset << endl;
     string username;
     string totalgames,totalwins,gametime,totalgametime;
     cout<<"enter your name: ";
@@ -249,6 +251,8 @@ void user() {
 }
 
 void history() {
+    system("cls");
+    cout << red << "History" << reset << endl;
     string line;
     ifstream historyfile("History/history.txt");
     while(getline(historyfile , line)){
