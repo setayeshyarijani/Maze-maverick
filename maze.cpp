@@ -17,8 +17,8 @@ void createmap()
     system("cls");
     cout << red << "Create map" << reset << endl;
     int number, n, m, min_num, max_num, min_zero, max_zero, step;
-    cout << "1.Easy" << endl << "2.Hard" << endl;
-    cin >> difficulty;
+    cout << "1.Easy" << endl << "2.Hard" << endl << "3.Back to menu" <<endl;
+    cin >> number;
     if(number == 1)
 	{
         cout << "Height: " << endl;
@@ -31,7 +31,7 @@ void createmap()
         max_zero = min(5 , m * n - m - n + 1);
         step = m + n - 2;
     }
-    else
+    else if(number == 2)
 	{
         cout << "Height: " << endl;
         cin >> n;
@@ -49,7 +49,8 @@ void createmap()
         cin >> step;
         max_zero = min(max_zero , m * n - step - 1);
     }
-
+    else if(number == 3)
+	return;
     bool pathfound = false;
     vector<vector<int>> a(n, vector<int>(m));
         for(int i = 0; i < n; i++)
@@ -158,7 +159,7 @@ void solvemaze() {
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl;
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl <<  "3.Back to menu" <<endl;
     cin >> number;
     if (number == 1)
     {
@@ -166,11 +167,13 @@ void solvemaze() {
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else
+    else if(number == 2)
     {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    else if(number == 3)
+	return;
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
