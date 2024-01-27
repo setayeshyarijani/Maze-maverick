@@ -1,3 +1,9 @@
+Date: Sat Jan 27 22:38:11 2024
+Username: setayesh
+Mapname: map2
+Gametime: 10
+Result: Lose
+---------------------
 Date: Sat Jan 27 22:33:16 2024
 Username: kimia
 Mapname: map1
