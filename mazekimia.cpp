@@ -29,25 +29,27 @@ struct Player
 // function for playing game //
 void playground() {
     system("cls");
+    cout << red << "Playground" << reset << endl;
     int number;
     // define mapfile for choosing a map //
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "Playground" << endl;
-    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
     // get the player choice //
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl << "3.Back to menu" << endl;
     cin >> number;
-    if (number==1)
+    if (number == 1)
     {
-        cout << "enter the map name" << endl;
+        cout << "Enter the map name" << endl;
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else
-    {   cout << "enter the map address" << endl;
+    else if(number == 2)
+    {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    else if(number == 3)
+        return;
     // reading mapfile //
     int m, n;
     mapfile >> m >> n;
@@ -68,7 +70,7 @@ void playground() {
         mapcrossed.push_back(falses);
     }
     mapfile.close();
-    cout << "enter your name: ";
+    cout << "Enter your name: ";
     string username;
     cin >> username;
     int sum = 0;
@@ -154,12 +156,12 @@ void playground() {
     // show the game result //
     string result;
     if(win){
-        cout << "you win"<<endl << "press enter to continue";
+        cout << "You win" << endl << "Press enter to continue";
         getch();
         result = "Win";
     }
     else{
-       cout << "you lose"<<endl << "press enter to continue";
+       cout << "You lose"<< endl << "Press enter to continue";
        getch();
        result = "Lose";
     }
@@ -177,10 +179,10 @@ void updateUser(string name , string result , int gameTime){
     Player user;
     // if user has played before //
     if(file.is_open()){
-        file>>user.totalgames>>user.games;
-        file>>user.totalwins>>user.wins;
-        file>>user.gametime>>user.lastTime;
-        file>>user.totalgametime>>user.totalTime;
+        file >> user.totalgames >> user.games;
+        file >> user.totalwins >> user.wins;
+        file >> user.gametime >> user.lastTime;
+        file >> user.totalgametime >> user.totalTime;
         file.close();
         user.games++;
         if(result == "Win"){
@@ -190,7 +192,7 @@ void updateUser(string name , string result , int gameTime){
         user.totalTime += gameTime;
         ofstream file("Users/" + name + ".txt");
         if(file.is_open()){
-            file<<user.totalgames<<" "<<user.games<<endl<<user.totalwins<<" "<<user.wins<<endl<<user.gametime<<" "<<user.lastTime<<endl<<user.totalgametime<<" "<<user.totalTime;
+            file << user.totalgames << " " << user.games << endl << user.totalwins << " " << user.wins << endl << user.gametime << " " << user.lastTime << endl << user.totalgametime << " " << user.totalTime;
             file.close();
         }
     }
@@ -198,16 +200,16 @@ void updateUser(string name , string result , int gameTime){
     else{
         ofstream file("Users/" + name + ".txt");
         if(file.is_open()){
-            file<<"Totalgames: "<< 1 <<endl;
+            file << "Totalgames: " << 1 << endl;
             if(result == "Win"){
-                file<<"Totalwins: "<< 1 <<endl;
-                file<<"Gametime: " << gameTime << endl;
+                file << "Totalwins: " << 1 << endl;
+                file << "Gametime: " << gameTime << endl;
             }
             else{
-                file<<"Totalwins: "<< 0 <<endl;
-                file<<"Gametime: "<< 0 <<endl;
+                file << "Totalwins: " << 0 << endl;
+                file << "Gametime: " << 0 << endl;
             }
-            file<<"Totalgametime: "<< gameTime;
+            file << "Totalgametime: " << gameTime;
             file.close();
         }
     }
@@ -218,7 +220,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     ifstream file ("History/history.txt");
     int num = 0;
     string newdate = date; 
-    string a = "date : " + newdate + "username : " + username + "\n" +"mapname : " + mapname + "\n" + "game time : " + to_string(gametime) + "\n" + "result : "+ result + "\n" + "---------------------" + "\n";
+    string a = "Date: " + newdate + "Username: " + username + "\n" + "Mapname: " + mapname + "\n" + "Gametime: " + to_string(gametime) + "\n" + "Result: "+ result + "\n" + "---------------------" + "\n";
     string b;
     // updating game history for 10 last games //
     if(file.is_open())
@@ -246,37 +248,41 @@ void updatehistory(char* date , string username , string mapname , int gametime 
 
 // function for showing user information //
 void user() {
+    system("cls");
+    cout << red << "Users" << reset << endl;
     string username;
-    string totalgames,totalwins,gametime,totalgametime;
-    cout<<"enter your name: ";
-    cin>>username;
+    string totalgames, totalwins, gametime, totalgametime;
+    cout << "Enter your name: ";
+    cin >> username;
     ifstream userfile("Users/" + username + ".txt");
     // if user exists //
     if(userfile.is_open()){
-        getline(userfile,totalgames);
-        getline(userfile,totalwins);
-        getline(userfile,gametime);
-        getline(userfile,totalgametime);
+        getline(userfile, totalgames);
+        getline(userfile, totalwins);
+        getline(userfile, gametime);
+        getline(userfile, totalgametime);
     }
     // if user doesn't exist //
     else
     {
-        cout<<"no user found";
+        cout << "No user found";
     }
-    cout<<totalgames<<endl<<totalwins<<endl<<gametime<<endl<<totalgametime<<endl;
-    cout<<"press enter to continue";
+    cout << totalgames << endl << totalwins <<endl << gametime << endl << totalgametime << endl;
+    cout << "Press enter to continue";
     getch();
 }
 
 // function for showing games history //
 void history() {
+    system("cls");
+    cout << red << "History" << reset << endl;
     string line;
     ifstream historyfile("History/history.txt");
     while(getline(historyfile, line)){
         cout<<line<<endl;
     }
     historyfile.close();
-    cout<<"press enter to continue";
+    cout << "Press enter to continue";
     getch();
 }
 
@@ -284,7 +290,7 @@ void history() {
 void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     string mapsname;
     // getting map name from user //
-    cout << "enter the map name: ";
+    cout << "Enter the map name: ";
     cin >> mapsname;
     ofstream map("Maps/" + mapsname + ".txt");
     // write map in file //
