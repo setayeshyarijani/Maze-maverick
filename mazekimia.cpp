@@ -30,16 +30,16 @@ void playground() {
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "1.choose from existing maps" << endl << "2.import a custom map" << endl;
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl;
     cin >> number;
     if (number==1)
     {
-        cout << "enter the map name" << endl;
+        cout << "Enter the map name" << endl;
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
     else
-    {   cout << "enter the map address" << endl;
+    {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
@@ -62,7 +62,7 @@ void playground() {
         mapcrossed.push_back(falses);
     }
     mapfile.close();
-    cout << "enter your name: ";
+    cout << "Enter your name: ";
     string username;
     cin >> username;
     int sum = 0;
@@ -144,12 +144,12 @@ void playground() {
     }
     string result;
     if(win){
-        cout << "you win"<<endl << "press enter to continue";
+        cout << "You win"<<endl << "Press enter to continue";
         getch();
         result = "Win";
     }
     else{
-       cout << "you lose"<<endl << "press enter to continue";
+       cout << "You lose"<<endl << "Press enter to continue";
        getch();
        result = "Lose";
     }
@@ -202,7 +202,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     ifstream file ("History/history.txt");
     int num = 0;
     string newdate = date; 
-    string a = "date : " + newdate + "username : " + username + "\n" +"mapname : " + mapname + "\n" + "game time : " + to_string(gametime) + "\n" + "result : "+ result + "\n" + "---------------------" + "\n";
+    string a = "Date: " + newdate + "Username: " + username + "\n" +"Mapname: " + mapname + "\n" + "Gametime: " + to_string(gametime) + "\n" + "Result: "+ result + "\n" + "---------------------" + "\n";
     string b;
     if(file.is_open())
     {
@@ -232,7 +232,7 @@ void user() {
     cout << red << "Users" << reset << endl;
     string username;
     string totalgames,totalwins,gametime,totalgametime;
-    cout<<"enter your name: ";
+    cout<<"Enter your name: ";
     cin>>username;
     ifstream userfile("Users/" + username + ".txt");
     if(userfile.is_open()){
@@ -243,10 +243,10 @@ void user() {
     }
     else
     {
-        cout<<"no user found";
+        cout<<"No user found";
     }
     cout<<totalgames<<endl<<totalwins<<endl<<gametime<<endl<<totalgametime<<endl;
-    cout<<"press enter to continue";
+    cout<<"Press enter to continue";
     getch();
 }
 
@@ -259,13 +259,13 @@ void history() {
         cout<<line<<endl;
     }
     historyfile.close();
-    cout<<"press enter to continue";
+    cout<<"Press enter to continue";
     getch();
 }
 
 void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     string mapsname;
-    cout << "enter the map name: ";
+    cout << "Enter the map name: ";
     cin >> mapsname;
     ofstream map("Maps/" + mapsname + ".txt");
     if (map.is_open())
