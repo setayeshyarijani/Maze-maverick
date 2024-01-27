@@ -31,6 +31,7 @@ void playground() {
     system("cls");
     cout << red << "Playground" << reset << endl;
     int number;
+    int whileflag = 1;
     // define mapfile for choosing a map //
     ifstream mapfile;
     string mapname, addressfile;
@@ -39,9 +40,15 @@ void playground() {
     cin >> number;
     if (number == 1)
     {
-        cout << "Enter the map name" << endl;
-        cin >> mapname;
-        mapfile.open("Maps/" + mapname + ".txt");
+        while ( whileflag == 1){
+            cout << "Enter the map name" << endl;
+            cin >> mapname;
+            mapfile.open("Maps/" + mapname + ".txt");
+            if(mapfile.is_open())
+                whileflag = 0;
+            else
+                cout << "No map found!" << endl;
+        }
     }
     else if(number == 2)
     {   cout << "Enter the map address" << endl;
