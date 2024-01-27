@@ -1,0 +1,4 @@
+Totalgames: 1
+Totalwins: 1
+Gametime: 6
+Totalgametime: 6
