@@ -30,19 +30,21 @@ void playground() {
     int number;
     ifstream mapfile;
     string mapname, addressfile;
-    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl;
+    cout << "1.Choose from existing maps" << endl << "2.Import a custom map" << endl << "3.Back to menu" <<endl;
     cin >> number;
-    if (number==1)
+    if (number == 1)
     {
         cout << "Enter the map name" << endl;
         cin >> mapname;
         mapfile.open("Maps/" + mapname + ".txt");
     }
-    else
+    else if(number == 1)
     {   cout << "Enter the map address" << endl;
         cin >> addressfile;
         mapfile.open(addressfile);
     }
+    else if(number == 3)
+        return;
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
