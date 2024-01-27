@@ -299,6 +299,25 @@ void savemap(int n , int m , int step , vector<vector<int>> mazemap) {
     // getting map name from user //
     cout << "Enter the map name: ";
     cin >> mapsname;
+    string a="";
+    string b;
+    // adding mapname to a mapsname file //
+    ifstream inputfile("Maps/mapsname.txt");
+    if (inputfile.is_open()){
+        while(getline(inputfile, b)){
+            a += b + "\n";
+        }
+        a += mapsname + "\n";
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << a;
+        outputfile.close();
+    }
+    else{
+        ofstream outputfile("Maps/mapsname.txt");
+        outputfile << mapsname;
+        outputfile.close();
+    }
+    inputfile.close();
     ofstream map("Maps/" + mapsname + ".txt");
     // write map in file //
     if (map.is_open())
