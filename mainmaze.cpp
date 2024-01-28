@@ -101,13 +101,13 @@ void createmap()
         cin >> n;
         cout << "Width: " << endl;
         cin >> m;
-        cout << "Block min value: " << endl;
+        cout << "Min block value: " << endl;
         cin >> min_num;
-        cout << "Block max value: " << endl;
+        cout << "Max block value: " << endl;
 		cin >> max_num;
-        cout << "Block min zero: " << endl;
+        cout << "Min number of zeros: " << endl;
         cin >> min_zero; 
-        cout << "Block max zero: " << endl;
+        cout << "Max number of zeros: " << endl;
         cin >> max_zero;
         cout << "PathLength: " << endl;
         cin >> step;
@@ -199,10 +199,10 @@ void findPath(int x, int y, int n, int m, int &pathLength, int step ,vector<vect
 {
     a[x][y] = 1;
     if (x == n - 1 && y == m - 1 && pathLength == step ) 
-      {
+    {
         flag = 0;
         return;
-      }
+    }
     if(pathLength > step - 1)
     {
         a[x][y] = 2;
@@ -402,8 +402,7 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
 }
 
 // function for valid blocks //
-bool isValid(int x, int y, int n, int m, vector<vector<int>> a) 
-{
+bool isValid(int x, int y, int n, int m, vector<vector<int>> a) {
     return x >= 0 && x < n && y >= 0 && y < m && a[x][y] != 1;
 }
 
@@ -573,7 +572,7 @@ void playground() {
 }
 
 // function for updating users game information //
-void updateUser(string name , string result , int gameTime){
+void updateUser(string name , string result , int gameTime) {
     ifstream file("Users/" + name + ".txt");
     Player user;
     // if user has played before //
@@ -637,6 +636,7 @@ void updatehistory(char* date , string username , string mapname , int gametime 
     }
     ofstream historyfile ("History/history.txt");
     historyfile << a;
+    historyfile.close();
 }
 
 // function for showing user information //
