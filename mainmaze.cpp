@@ -448,7 +448,7 @@ void playground() {
     }
     else if(number == 3)
         return;
-    // reading mapfile //
+    // reading mapfile and fill the 2D arrays //
     int m, n;
     mapfile >> m >> n;
     vector<vector<int>> mapvalues;
@@ -475,7 +475,7 @@ void playground() {
     int x = 0, y = 0;
     bool win = true;
     int start = time(0);
-    // calculate the Date //
+    // calculate the date //
     time_t now = time(0);
     char* date = ctime(&now);
     while (true)
@@ -501,12 +501,14 @@ void playground() {
             }
             cout << endl;
         }
+        // check if the player has won or lost //
         if (x == m - 1 && y == n - 1)
         {
             if (sum != mapvalues[x][y])
                 win = false;
             break;
         }
+        // mark the current point as crossed //
         mapcrossed[x][y] = true;
         // define and make movements //
         int ch = getch();
