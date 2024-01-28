@@ -1,0 +1,4 @@
+Totalgames: 1
+Totalwins: 0
+LastwinGametime: 0
+Totalgametime: 9
