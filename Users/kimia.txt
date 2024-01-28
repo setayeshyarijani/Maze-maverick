@@ -1,4 +1,0 @@
-Totalgames: 2
-Totalwins: 0
-LastwinGametime: 0
-Totalgametime: 16
