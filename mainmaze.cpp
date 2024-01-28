@@ -627,16 +627,10 @@ void updatehistory(char* date , string username , string mapname , int gametime 
         while (getline(file , b) &&  num < 9)
         {
             a += b + "\n";
-            getline(file , b);
-            a += b + "\n";
-            getline(file , b);
-            a += b + "\n";
-            getline(file , b);
-            a += b + "\n";
-            getline(file , b);
-            a += b + "\n";
-            getline(file , b);
-            a += b + "\n";
+            for (int i = 0 ; i < 5 ; i++){
+                getline(file , b);
+                a += b + "\n";
+            }
             num++;
         }
     file.close();
