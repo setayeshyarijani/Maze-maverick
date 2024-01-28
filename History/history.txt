@@ -1,0 +1,6 @@
+Date: Mon Jan 29 02:23:52 2024
+Username: kimia
+Mapname: map1
+Gametime: 6
+Result: Lose
+---------------------
