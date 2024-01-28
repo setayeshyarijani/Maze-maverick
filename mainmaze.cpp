@@ -643,24 +643,21 @@ void updatehistory(char* date , string username , string mapname , int gametime 
 void user() {
     system("cls");
     cout << red << "Users" << reset << endl;
-    string username;
-    string totalgames, totalwins, gametime, totalgametime;
+    string username, line;
     cout << "Enter your name: ";
     cin >> username;
     ifstream userfile("Users/" + username + ".txt");
     // if user exists //
-    if(userfile.is_open()){
-        getline(userfile, totalgames);
-        getline(userfile, totalwins);
-        getline(userfile, gametime);
-        getline(userfile, totalgametime);
+     if(userfile.is_open()){
+        while(getline(userfile, line)){
+            cout << line << endl;
+        }
     }
     // if user doesn't exist //
     else
     {
-        cout << "No user found";
+        cout << "No user found" << endl;
     }
-    cout << totalgames << endl << totalwins <<endl << gametime << endl << totalgametime << endl;
     cout << "Press enter to continue";
     getch();
 }
