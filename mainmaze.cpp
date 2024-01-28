@@ -376,26 +376,27 @@ void resultpath(int x, int y, int n, int m, int &pathLength, int step ,vector<ve
     pathLength++;
     // condition for move and path //
     vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        // check if the move is valid and the cell is not blocked //
         if (isValid(x+1, y, n, m, a) && b[x+1][y] != 0) {
             resultpath(x+1, y, n, m, pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
         }
-        if (isValid(x-1, y, n, m, a)&&b[x-1][y] != 0) {
+        if (isValid(x-1, y, n, m, a) && b[x-1][y] != 0) {
             resultpath(x-1, y, n, m, pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
         }
-        if (isValid(x, y+1, n, m, a)&&b[x][y+1] != 0) {
+        if (isValid(x, y+1, n, m, a) && b[x][y+1] != 0) {
             resultpath(x, y+1, n , m , pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
         }
-         if (isValid(x,y-1, n, m, a) &&b[x][y-1] != 0) {
+        if (isValid(x,y-1, n, m, a) && b[x][y-1] != 0) {
             resultpath(x, y-1, n, m, pathLength, step, a, flag, sum, b);
             if(flag == 0)
                 return;
-         }
+        }
     a[x][y] = 2;
     sum -=b[x][y];
     pathLength--;
