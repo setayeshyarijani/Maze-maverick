@@ -606,7 +606,7 @@ void updateUser(string name , string result , int gameTime){
             }
             else{
                 file << "Totalwins: " << 0 << endl;
-                file << "Gametime: " << 0 << endl;
+                file << "LastwinGametime: " << 0 << endl;
             }
             file << "Totalgametime: " << gameTime;
             file.close();
