@@ -648,7 +648,7 @@ void user() {
     cin >> username;
     ifstream userfile("Users/" + username + ".txt");
     // if user exists //
-     if(userfile.is_open()){
+    if(userfile.is_open()){
         while(getline(userfile, line)){
             cout << line << endl;
         }
@@ -658,6 +658,7 @@ void user() {
     {
         cout << "No user found" << endl;
     }
+    userfile.close();
     cout << "Press enter to continue";
     getch();
 }
